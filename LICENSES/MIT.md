@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 You (Neil) Zhang and Yoshiki Masuyama
+Copyright (c) 2023 Chin-Yun Yu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
