@@ -43,7 +43,7 @@ The tutorial sequence is `00 → 01 → 02 → 03`.
 ```bash
 conda create -n dafx-hrtf python=3.10 -y
 conda activate dafx-hrtf
-pip install -r requirements.txt
+pip install -r requirements.txt jupyterlab ipykernel
 ```
 
 Then launch, from the repo root:
@@ -51,6 +51,8 @@ Then launch, from the repo root:
 ```bash
 jupyter lab .
 ```
+
+> `requirements.txt` intentionally omits `jupyterlab`/`ipykernel`: it's also what the Colab bootstrap cell installs, and Colab already ships its own pinned Jupyter kernel stack — installing a newer one on top of it causes pip dependency-resolver conflicts (harmless there, but noisy). Install them separately for local use, as above.
 
 ## Data
 
