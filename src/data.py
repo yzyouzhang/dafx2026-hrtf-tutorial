@@ -32,43 +32,6 @@ def load_real_sonicom_dir(dir_path):
     return hrir, positions, np.array(subject_ids), fs
 
 
-def synthesize_sonicom_like(n_subjects=5, n_taps=200, fs=44100):
-    """Fake but grid-accurate SONICOM-style sampling + toy HRIRs, so a
-    notebook is runnable before real .sofa files are wired up."""
-    azimuths = np.arange(0, 360, 5)  # 72 azimuths
-
-    def elevations_for(az):
-        # SONICOM: every 10 deg between -30/30, every 15 deg outside, single pole sample at +90
-        dense = np.arange(-30, 31, 10)
-        sparse_low = np.arange(-45, -30, 15)
-        sparse_high = np.arange(45, 91, 15)
-        return np.concatenate([sparse_low, dense, sparse_high])
-
-    rows = []
-    for az in azimuths:
-        for el in elevations_for(az):
-            if el == 90 and az != 0:
-                continue  # only one measurement at the pole, per SONICOM spec
-            rows.append((az, el, 1.5))
-    positions = np.array(rows, dtype=np.float32)  # ~793 rows
-    n_dir = positions.shape[0]
-
-    t = np.arange(n_taps) / fs
-    hrir = np.zeros((n_subjects, n_dir, 2, n_taps), dtype=np.float32)
-    for s in range(n_subjects):
-        head_radius_scale = 0.85 + 0.3 * np.random.rand()
-        for d in range(n_dir):
-            az_rad = np.deg2rad(positions[d, 0])
-            itd = 0.0006 * np.sin(az_rad) * head_radius_scale
-            for ear, sign in enumerate([-1, 1]):
-                delay = max(0.0, itd * sign + 0.001)
-                env = np.exp(-t / (0.0008 + 0.0002 * np.random.rand()))
-                carrier = np.sin(2 * np.pi * (1500 + 300 * ear) * (t - delay))
-                hrir[s, d, ear] = (env * carrier).astype(np.float32)
-    subject_ids = np.array([f"synthetic_{i:02d}" for i in range(n_subjects)])
-    return hrir, positions, subject_ids, fs
-
-
 def hrir_to_hrtf_db(hrir_1d, fs, n_fft=512):
     """FFT a single 1D HRIR to (freqs, magnitude in dB)."""
     spec = np.fft.rfft(hrir_1d, n=n_fft)

@@ -54,11 +54,11 @@ jupyter lab .
 
 ## Data
 
-The notebooks use the [SONICOM HRTF Dataset](https://www.sonicom.eu/tools-and-resources/hrtf-dataset/) (200 subjects, 793 measured directions each, CC BY-SA license). Notebooks `00` and `01` fall back to synthetic data shaped like the real measurement grid if no `.sofa` files are found, so everything runs out of the box without any data download — useful for following along without setup, or for testing changes to this repo.
+The notebooks use the [SONICOM HRTF Dataset](https://www.sonicom.eu/tools-and-resources/hrtf-dataset/) (200 subjects total, CC BY-SA license). 30 real subjects (`p0001`–`p0030`) are bundled directly under `data/sonicom/`, so everything runs out of the box with no separate download. Each subject's `.sofa` file has 828 measured directions — see the note in `00_data_and_sampling.ipynb` on why that's not the 793 the dataset paper quotes.
 
-To run on real data:
+To use a different or larger subset of SONICOM subjects:
 
-1. Download `.sofa` files from the [SONICOM dataset portal](https://transfer.ic.ac.uk:9090/#/2022_SONICOM-HRTF-DATASET/).
+1. Download additional `.sofa` files from the [SONICOM dataset portal](https://transfer.ic.ac.uk:9090/#/2022_SONICOM-HRTF-DATASET/).
 2. Place them under `data/sonicom/`.
 3. Each notebook auto-detects `.sofa` files in `SOFA_DIR`; `00_data_and_sampling.ipynb` also accepts a single-file override via `SOFA_PATH`.
 
