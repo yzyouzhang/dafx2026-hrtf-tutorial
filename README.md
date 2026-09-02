@@ -71,7 +71,9 @@ Official materials for the papers covered in the tutorial:
 - **HRTF Field** — [github.com/yzyouzhang/hrtf_field](https://github.com/yzyouzhang/hrtf_field)
 - **NIIRF** — [github.com/merlresearch/neural-IIR-field](https://github.com/merlresearch/neural-IIR-field)
 - **RANF** — [github.com/merlresearch/ranf-hrtf](https://github.com/merlresearch/ranf-hrtf)
+- **HRTF Field Norm** - [github.com/YutongWen/HRTF\_field\_norm](https://github.com/YutongWen/HRTF_field_norm)
 - **SuDaField** — [github.com/merlresearch/SuDaField](https://github.com/merlresearch/SuDaField)
+- **Perception-Informed NF** - [https://ieeexplore.ieee.org/document/11231001](https://ieeexplore.ieee.org/document/11231001)
 
 ## Citation
 
